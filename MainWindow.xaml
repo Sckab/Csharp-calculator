@@ -3,16 +3,16 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
         xmlns:local="clr-namespace:Calculator"
         mc:Ignorable="d"
         Title="Calculator"
         Width="400"
-        Height="600"
+        Height="632"
         ResizeMode="CanMinimize"
         WindowStartupLocation="CenterScreen"
         Background="#181616"
-        Icon="./assets/icon.ico">
-
+        Icon="./assets/icon_2.ico">
     <Grid ShowGridLines="False">
         <!--
         ========================
@@ -30,7 +30,9 @@
             ROWS
         -->
         <Grid.RowDefinitions>
-            <RowDefinition Height="170"></RowDefinition>
+            <RowDefinition Height="32"></RowDefinition>
+            <RowDefinition Height="100"></RowDefinition>
+            <RowDefinition Height="70"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
@@ -86,6 +88,48 @@
 
             <!--
             ========================
+                OTHER BUTTONS
+            -->
+            <Style x:Key="OtherButton"
+                   TargetType="Button">
+                <Setter Property="OverridesDefaultStyle"
+                        Value="True"/>
+                <Setter Property="Margin"
+                        Value="5"/>
+                <Setter Property="Foreground"
+                        Value="#74966a"/>
+                <Setter Property="FontWeight"
+                        Value="Bold"/>
+                <Setter Property="FontSize"
+                        Value="22"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border Name="border"
+                                    BorderThickness="0"
+                                    Padding="4,2"
+                                    BorderBrush="DarkGray"
+                                    CornerRadius="6"
+                                    Background="{TemplateBinding Background}">
+                                <ContentPresenter HorizontalAlignment="Center"
+                                                  VerticalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="Background"
+                        Value="#353535"/>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver"
+                             Value="True">
+                        <Setter Property="Background"
+                                Value="#2a2a2a"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
+            <!--
+            ========================
                 MAIN LABEL
             -->
             <Style x:Key="LabelStyle"
@@ -125,7 +169,7 @@
         <Label Style="{StaticResource LabelStyle}"
                Name="Display"
                Grid.Column="0"
-               Grid.Row="0"
+               Grid.Row="1"
                Grid.ColumnSpan="4"/>
 
         <!--
@@ -133,85 +177,95 @@
             BUTTONS
         -->
 
-        <!-- 
-            SECOND ROW
-        -->
+        <Button Style="{StaticResource OtherButton}"
+                Grid.Column="0"
+                Grid.Row="2"
+                Name="Delete_1"
+                Click="BtnDelete1">
+            <Button.Content>
+                <fa:IconBlock Icon="DeleteLeft"
+                              Foreground="#74966a"/>
+            </Button.Content>
+        </Button>
+
+        <Button Style="{StaticResource OtherButton}"
+                Grid.Column="1"
+                Grid.Row="2"
+                Name="Delete_All"
+                Click="BtnDeleteAll">
+            <Button.Content>
+                <fa:IconBlock Icon="Eraser"
+                              Foreground="#74966a"/>
+            </Button.Content>
+        </Button>
+
         <Button Style="{StaticResource NumbersButton}"
                 x:Name="Number_7"
                 Grid.Column="0"
-                Grid.Row="1">
+                Grid.Row="3">
             7
         </Button>
 
         <Button Style="{StaticResource NumbersButton}"
                 x:Name="Number_8"
                 Grid.Column="1"
-                Grid.Row="1">
+                Grid.Row="3">
             8
         </Button>
 
         <Button Style="{StaticResource NumbersButton}"
                 x:Name="Number_9"
                 Grid.Column="2"
-                Grid.Row="1">
+                Grid.Row="3">
             9
         </Button>
 
-        <!-- 
-            THIRD ROW
-        -->
         <Button Style="{StaticResource NumbersButton}"
                 x:Name="Number_4"
                 Grid.Column="0"
-                Grid.Row="2">
+                Grid.Row="4">
             4
         </Button>
 
         <Button Style="{StaticResource NumbersButton}"
                 x:Name="Number_5"
                 Grid.Column="1"
-                Grid.Row="2">
+                Grid.Row="4">
             5
         </Button>
 
         <Button Style="{StaticResource NumbersButton}"
                 x:Name="Number_6"
                 Grid.Column="2"
-                Grid.Row="2">
+                Grid.Row="4">
             6
         </Button>
 
-        <!-- 
-            FOURTH ROW
-        -->
         <Button Style="{StaticResource NumbersButton}"
                 x:Name="Number_1"
                 Grid.Column="0"
-                Grid.Row="3">
+                Grid.Row="5">
             1
         </Button>
 
         <Button Style="{StaticResource NumbersButton}"
                 x:Name="Number_2"
                 Grid.Column="1"
-                Grid.Row="3">
+                Grid.Row="5">
             2
         </Button>
 
         <Button Style="{StaticResource NumbersButton}"
                 x:Name="Number_3"
                 Grid.Column="2"
-                Grid.Row="3">
+                Grid.Row="5">
             3
         </Button>
 
-        <!-- 
-            FIFTH ROW
-        -->
         <Button Style="{StaticResource NumbersButton}"
                 x:Name="Number_0"
                 Grid.Column="1"
-                Grid.Row="4">
+                Grid.Row="6">
             0
         </Button>
     </Grid>

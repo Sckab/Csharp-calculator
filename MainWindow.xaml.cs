@@ -8,7 +8,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using NumbersBtn;
+using NumbersBtns;
 
 namespace Calculator;
 
@@ -38,5 +38,43 @@ public partial class MainWindow : Window
         Number_7.Click += _numbers.BtnNumberClick_7;
         Number_8.Click += _numbers.BtnNumberClick_8;
         Number_9.Click += _numbers.BtnNumberClick_9;
+
+
     }
+
+    public void BtnDelete1(object sender, RoutedEventArgs e)
+    {
+        if (Display != null && Display.Content != null &&
+            !string.IsNullOrEmpty(Display.Content.ToString()))
+        {
+            Display.Content = Display.Content.ToString()
+                               .Remove(Display.Content.ToString().Length - 1);
+        }
+    }
+
+    public void BtnDeleteAll(object sender, RoutedEventArgs e)
+    {
+        if (Display != null && Display.Content != null &&
+            !string.IsNullOrEmpty(Display.Content.ToString()))
+        {
+            Display.Content = "";
+        }
+    }
+
+    private void TitleBar_MouseDown(object sender, MouseButtonEventArgs e)
+    {
+        if (e.LeftButton == MouseButtonState.Pressed)
+            this.DragMove();
+    }
+
+    private void CloseButton_Click(object sender, RoutedEventArgs e)
+    {
+        this.Close();
+    }
+
+    private void MinimizeButton_Click(object sender, RoutedEventArgs e)
+    {
+        this.WindowState = WindowState.Minimized;
+    }
+
 }
