@@ -20,4 +20,9 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
     }
+
+    void BtnNumberClick(object sender, RoutedEventArgs e)
+    {
+
+    }
 }
