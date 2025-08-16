@@ -39,9 +39,13 @@
 
         <!--
         ========================
-            BUTTONS STYLE
+            CUSTOM STYLES
         -->
         <Grid.Resources>
+            <!--
+            ========================
+                NUMBERS BUTTONS
+            -->
             <Style x:Key="NumbersButton"
                    TargetType="Button">
                 <Setter Property="OverridesDefaultStyle"
@@ -53,7 +57,7 @@
                 <Setter Property="FontWeight"
                         Value="Bold"/>
                 <Setter Property="FontSize"
-                        Value="20"/>
+                        Value="22"/>
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="Button">
@@ -62,8 +66,50 @@
                                     Padding="4,2"
                                     BorderBrush="DarkGray"
                                     CornerRadius="6"
-                                    Background="#2a2a2a">
+                                    Background="{TemplateBinding Background}">
                                 <ContentPresenter HorizontalAlignment="Center"
+                                                  VerticalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="Background"
+                        Value="#2a2a2a"/>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver"
+                             Value="True">
+                        <Setter Property="Background"
+                                Value="#353535"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
+            <!--
+            ========================
+                MAIN LABEL
+            -->
+            <Style x:Key="LabelStyle"
+                   TargetType="Label">
+                <Setter Property="OverridesDefaultStyle"
+                        Value="True"/>
+                <Setter Property="Margin"
+                        Value="5"/>
+                <Setter Property="Foreground"
+                        Value="#74966a"/>
+                <Setter Property="FontWeight"
+                        Value="Bold"/>
+                <Setter Property="FontSize"
+                        Value="44"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Label">
+                            <Border Name="border"
+                                    BorderThickness="0"
+                                    Padding="8,8"
+                                    BorderBrush="DarkGray"
+                                    CornerRadius="6"
+                                    Background="#2a2a2a">
+                                <ContentPresenter HorizontalAlignment="Right"
                                                   VerticalAlignment="Center"/>
                             </Border>
                         </ControlTemplate>
@@ -74,78 +120,99 @@
 
         <!--
         ========================
+            LABEL
+        -->
+        <Label Style="{StaticResource LabelStyle}"
+               Name="Display"
+               Grid.Column="0"
+               Grid.Row="0"
+               Grid.ColumnSpan="4"/>
+
+        <!--
+        ========================
             BUTTONS
         -->
+
+        <!-- 
+            SECOND ROW
+        -->
         <Button Style="{StaticResource NumbersButton}"
-                Click="BtnNumberClick"
-                Name="Number_7"
+                x:Name="Number_7"
                 Grid.Column="0"
                 Grid.Row="1">
             7
         </Button>
 
         <Button Style="{StaticResource NumbersButton}"
-                Click="BtnNumberClick"
-                Name="Number_8"
+                x:Name="Number_8"
                 Grid.Column="1"
                 Grid.Row="1">
             8
         </Button>
 
         <Button Style="{StaticResource NumbersButton}"
-                Click="BtnNumberClick"
-                Name="Number_9"
+                x:Name="Number_9"
                 Grid.Column="2"
                 Grid.Row="1">
             9
         </Button>
 
+        <!-- 
+            THIRD ROW
+        -->
         <Button Style="{StaticResource NumbersButton}"
-                Click="BtnNumberClick"
-                Name="Number_4"
+                x:Name="Number_4"
                 Grid.Column="0"
                 Grid.Row="2">
             4
         </Button>
 
         <Button Style="{StaticResource NumbersButton}"
-                Click="BtnNumberClick"
-                Name="Number_5"
+                x:Name="Number_5"
                 Grid.Column="1"
                 Grid.Row="2">
             5
         </Button>
 
         <Button Style="{StaticResource NumbersButton}"
-                Click="BtnNumberClick"
-                Name="Number_6"
+                x:Name="Number_6"
                 Grid.Column="2"
                 Grid.Row="2">
             6
         </Button>
 
+        <!-- 
+            FOURTH ROW
+        -->
         <Button Style="{StaticResource NumbersButton}"
-                Click="BtnNumberClick"
-                Name="Number_1"
+                x:Name="Number_1"
                 Grid.Column="0"
                 Grid.Row="3">
             1
         </Button>
 
         <Button Style="{StaticResource NumbersButton}"
-                Click="BtnNumberClick"
-                Name="Number_2"
+                x:Name="Number_2"
                 Grid.Column="1"
                 Grid.Row="3">
             2
         </Button>
 
         <Button Style="{StaticResource NumbersButton}"
-                Click="BtnNumberClick"
-                Name="Number_3"
+                x:Name="Number_3"
                 Grid.Column="2"
                 Grid.Row="3">
             3
+        </Button>
+
+        <!-- 
+            FIFTH ROW
+        -->
+        <Button Style="{StaticResource NumbersButton}"
+                x:Name="Number_0"
+                Grid.Column="1"
+                Grid.Row="4">
+            0
         </Button>
     </Grid>
 </Window>

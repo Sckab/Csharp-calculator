@@ -8,6 +8,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using NumbersBtn;
 
 namespace Calculator;
 
@@ -16,13 +17,26 @@ namespace Calculator;
 /// </summary>
 public partial class MainWindow : Window
 {
+    private Number _numbers;
+
     public MainWindow()
     {
         InitializeComponent();
-    }
 
-    void BtnNumberClick(object sender, RoutedEventArgs e)
-    {
+        /*
+         *  NUMBERS LOGIC
+         */
+        _numbers = new Number(this);
 
+        Number_0.Click += _numbers.BtnNumberClick_0;
+        Number_1.Click += _numbers.BtnNumberClick_1;
+        Number_2.Click += _numbers.BtnNumberClick_2;
+        Number_3.Click += _numbers.BtnNumberClick_3;
+        Number_4.Click += _numbers.BtnNumberClick_4;
+        Number_5.Click += _numbers.BtnNumberClick_5;
+        Number_6.Click += _numbers.BtnNumberClick_6;
+        Number_7.Click += _numbers.BtnNumberClick_7;
+        Number_8.Click += _numbers.BtnNumberClick_8;
+        Number_9.Click += _numbers.BtnNumberClick_9;
     }
 }
