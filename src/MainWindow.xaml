@@ -13,7 +13,8 @@
         WindowStartupLocation="CenterScreen"
         Background="Transparent"
         WindowStyle="None"
-        AllowsTransparency="True">
+        AllowsTransparency="True"
+        Icon="icon.ico">
 
     <Border BorderBrush="#74966a"
             BorderThickness="1"
