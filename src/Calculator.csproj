@@ -9,8 +9,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Resource Include="Assets\icon.ico" />
-    <Resource Include="Assets\icon_2.ico" />
+    <Resource Include="..\Assets\icon.ico" />
+    <Resource Include="..\Assets\icon_2.ico" />
     <PackageReference Include="FontAwesome.Sharp" Version="6.6.0" />
   </ItemGroup>
 
