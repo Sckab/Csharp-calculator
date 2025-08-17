@@ -11,262 +11,385 @@
         Height="632"
         ResizeMode="CanMinimize"
         WindowStartupLocation="CenterScreen"
-        Background="#181616"
-        Icon="./assets/icon_2.ico">
-    <Grid ShowGridLines="False">
-        <!--
-        ========================
-            COLUMNS
-        -->
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-        </Grid.ColumnDefinitions>
+        Background="Transparent"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Icon="./assets/icon.ico">
 
-        <!--
-        ========================
-            ROWS
-        -->
-        <Grid.RowDefinitions>
-            <RowDefinition Height="32"></RowDefinition>
-            <RowDefinition Height="100"></RowDefinition>
-            <RowDefinition Height="70"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-        </Grid.RowDefinitions>
-
-        <!--
-        ========================
-            CUSTOM STYLES
-        -->
-        <Grid.Resources>
+    <Border BorderBrush="#74966a"
+            BorderThickness="1"
+            CornerRadius="10"
+            Background="#181616">
+        <Grid ShowGridLines="False">
             <!--
             ========================
-                NUMBERS BUTTONS
+                COLUMNS
             -->
-            <Style x:Key="NumbersButton"
-                   TargetType="Button">
-                <Setter Property="OverridesDefaultStyle"
-                        Value="True"/>
-                <Setter Property="Margin"
-                        Value="5"/>
-                <Setter Property="Foreground"
-                        Value="#74966a"/>
-                <Setter Property="FontWeight"
-                        Value="Bold"/>
-                <Setter Property="FontSize"
-                        Value="22"/>
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="Button">
-                            <Border Name="border"
-                                    BorderThickness="0"
-                                    Padding="4,2"
-                                    BorderBrush="DarkGray"
-                                    CornerRadius="6"
-                                    Background="{TemplateBinding Background}">
-                                <ContentPresenter HorizontalAlignment="Center"
-                                                  VerticalAlignment="Center"/>
-                            </Border>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-                <Setter Property="Background"
-                        Value="#2a2a2a"/>
-                <Style.Triggers>
-                    <Trigger Property="IsMouseOver"
-                             Value="True">
-                        <Setter Property="Background"
-                                Value="#353535"/>
-                    </Trigger>
-                </Style.Triggers>
-            </Style>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
 
             <!--
             ========================
-                OTHER BUTTONS
+                ROWS
             -->
-            <Style x:Key="OtherButton"
-                   TargetType="Button">
-                <Setter Property="OverridesDefaultStyle"
-                        Value="True"/>
-                <Setter Property="Margin"
-                        Value="5"/>
-                <Setter Property="Foreground"
-                        Value="#74966a"/>
-                <Setter Property="FontWeight"
-                        Value="Bold"/>
-                <Setter Property="FontSize"
-                        Value="22"/>
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="Button">
-                            <Border Name="border"
-                                    BorderThickness="0"
-                                    Padding="4,2"
-                                    BorderBrush="DarkGray"
-                                    CornerRadius="6"
-                                    Background="{TemplateBinding Background}">
-                                <ContentPresenter HorizontalAlignment="Center"
-                                                  VerticalAlignment="Center"/>
-                            </Border>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-                <Setter Property="Background"
-                        Value="#353535"/>
-                <Style.Triggers>
-                    <Trigger Property="IsMouseOver"
-                             Value="True">
-                        <Setter Property="Background"
-                                Value="#2a2a2a"/>
-                    </Trigger>
-                </Style.Triggers>
-            </Style>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="32"></RowDefinition>
+                <RowDefinition Height="100"></RowDefinition>
+                <RowDefinition Height="70"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
 
             <!--
             ========================
-                MAIN LABEL
+                CUSTOM STYLES
             -->
-            <Style x:Key="LabelStyle"
-                   TargetType="Label">
-                <Setter Property="OverridesDefaultStyle"
-                        Value="True"/>
-                <Setter Property="Margin"
-                        Value="5"/>
-                <Setter Property="Foreground"
-                        Value="#74966a"/>
-                <Setter Property="FontWeight"
-                        Value="Bold"/>
-                <Setter Property="FontSize"
-                        Value="44"/>
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="Label">
-                            <Border Name="border"
-                                    BorderThickness="0"
-                                    Padding="8,8"
-                                    BorderBrush="DarkGray"
-                                    CornerRadius="6"
-                                    Background="#2a2a2a">
-                                <ContentPresenter HorizontalAlignment="Right"
-                                                  VerticalAlignment="Center"/>
-                            </Border>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
-        </Grid.Resources>
+            <Grid.Resources>
+                <!--
+                ========================
+                    NUMBERS BUTTONS
+                -->
+                <Style x:Key="NumbersButton"
+                       TargetType="Button">
+                    <Setter Property="OverridesDefaultStyle"
+                            Value="True"/>
+                    <Setter Property="Margin"
+                            Value="5"/>
+                    <Setter Property="Foreground"
+                            Value="#74966a"/>
+                    <Setter Property="FontWeight"
+                            Value="Bold"/>
+                    <Setter Property="FontSize"
+                            Value="22"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Button">
+                                <Border Name="border"
+                                        BorderThickness="0"
+                                        Padding="4,2"
+                                        BorderBrush="DarkGray"
+                                        CornerRadius="6"
+                                        Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Center"
+                                                      VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="Background"
+                            Value="#2a2a2a"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver"
+                                 Value="True">
+                            <Setter Property="Background"
+                                    Value="#353535"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
 
-        <!--
-        ========================
-            LABEL
-        -->
-        <Label Style="{StaticResource LabelStyle}"
-               Name="Display"
-               Grid.Column="0"
-               Grid.Row="1"
-               Grid.ColumnSpan="4"/>
+                <!--
+                ========================
+                    OTHER BUTTONS
+                -->
+                <Style x:Key="OtherButton"
+                       TargetType="Button">
+                    <Setter Property="OverridesDefaultStyle"
+                            Value="True"/>
+                    <Setter Property="Margin"
+                            Value="5"/>
+                    <Setter Property="Foreground"
+                            Value="#74966a"/>
+                    <Setter Property="FontWeight"
+                            Value="Bold"/>
+                    <Setter Property="FontSize"
+                            Value="22"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Button">
+                                <Border Name="border"
+                                        BorderThickness="0"
+                                        Padding="4,2"
+                                        BorderBrush="DarkGray"
+                                        CornerRadius="6"
+                                        Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Center"
+                                                      VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="Background"
+                            Value="#353535"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver"
+                                 Value="True">
+                            <Setter Property="Background"
+                                    Value="#2a2a2a"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
 
-        <!--
-        ========================
-            BUTTONS
-        -->
+                <!--
+                ========================
+                    TITLEBAR BUTTONS
+                -->
+                <Style x:Key="TitleBarButton"
+                       TargetType="Button">
+                    <Setter Property="OverridesDefaultStyle"
+                            Value="True"/>
+                    <Setter Property="Margin"
+                            Value="0"/>
+                    <Setter Property="Foreground"
+                            Value="#74966a"/>
+                    <Setter Property="FontWeight"
+                            Value="Bold"/>
+                    <Setter Property="FontSize"
+                            Value="22"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Button">
+                                <Border Name="border"
+                                        BorderThickness="0"
+                                        Padding="0"
+                                        BorderBrush="DarkGray"
+                                        CornerRadius="0,7,0,0"
+                                        Background="#74966a">
+                                    <ContentPresenter HorizontalAlignment="Center"
+                                                      VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
 
-        <Button Style="{StaticResource OtherButton}"
-                Grid.Column="0"
-                Grid.Row="2"
-                Name="Delete_1"
-                Click="BtnDelete1">
-            <Button.Content>
-                <fa:IconBlock Icon="DeleteLeft"
-                              Foreground="#74966a"/>
-            </Button.Content>
-        </Button>
+                <Style x:Key="TitleBarButton_2"
+                       TargetType="Button">
+                    <Setter Property="OverridesDefaultStyle"
+                            Value="True"/>
+                    <Setter Property="Margin"
+                            Value="0"/>
+                    <Setter Property="Foreground"
+                            Value="#74966a"/>
+                    <Setter Property="FontWeight"
+                            Value="Bold"/>
+                    <Setter Property="FontSize"
+                            Value="22"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Button">
+                                <Border Name="border"
+                                        BorderThickness="0"
+                                        Padding="0"
+                                        BorderBrush="DarkGray"
+                                        CornerRadius="0,0,0,7"
+                                        Background="#74966a">
+                                    <ContentPresenter HorizontalAlignment="Center"
+                                                      VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
 
-        <Button Style="{StaticResource OtherButton}"
-                Grid.Column="1"
-                Grid.Row="2"
-                Name="Delete_All"
-                Click="BtnDeleteAll">
-            <Button.Content>
-                <fa:IconBlock Icon="Eraser"
-                              Foreground="#74966a"/>
-            </Button.Content>
-        </Button>
+                <!--
+                ========================
+                    MAIN LABEL
+                -->
+                <Style x:Key="LabelStyle"
+                       TargetType="Label">
+                    <Setter Property="OverridesDefaultStyle"
+                            Value="True"/>
+                    <Setter Property="Margin"
+                            Value="5"/>
+                    <Setter Property="Foreground"
+                            Value="#74966a"/>
+                    <Setter Property="FontWeight"
+                            Value="Bold"/>
+                    <Setter Property="FontSize"
+                            Value="44"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Label">
+                                <Border Name="border"
+                                        BorderThickness="0"
+                                        Padding="8,8"
+                                        BorderBrush="DarkGray"
+                                        CornerRadius="6"
+                                        Background="#2a2a2a">
+                                    <ContentPresenter HorizontalAlignment="Right"
+                                                      VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Grid.Resources>
 
-        <Button Style="{StaticResource NumbersButton}"
-                x:Name="Number_7"
-                Grid.Column="0"
-                Grid.Row="3">
-            7
-        </Button>
+            <!--
+            ========================
+                LABEL
+            -->
+            <Label Style="{StaticResource LabelStyle}"
+                   Name="Display"
+                   Grid.Column="0"
+                   Grid.Row="1"
+                   Grid.ColumnSpan="4"/>
 
-        <Button Style="{StaticResource NumbersButton}"
-                x:Name="Number_8"
-                Grid.Column="1"
-                Grid.Row="3">
-            8
-        </Button>
+            <!--
+            ========================
+                BUTTONS
+            -->
 
-        <Button Style="{StaticResource NumbersButton}"
-                x:Name="Number_9"
-                Grid.Column="2"
-                Grid.Row="3">
-            9
-        </Button>
+            <Button Style="{StaticResource OtherButton}"
+                    Grid.Column="0"
+                    Grid.Row="2"
+                    Name="Delete_1"
+                    Click="BtnDelete1">
+                <Button.Content>
+                    <fa:IconBlock Icon="DeleteLeft"
+                                  Foreground="#74966a"/>
+                </Button.Content>
+            </Button>
 
-        <Button Style="{StaticResource NumbersButton}"
-                x:Name="Number_4"
-                Grid.Column="0"
-                Grid.Row="4">
-            4
-        </Button>
+            <Button Style="{StaticResource OtherButton}"
+                    Grid.Column="1"
+                    Grid.Row="2"
+                    Name="Delete_All"
+                    Click="BtnDeleteAll">
+                <Button.Content>
+                    <fa:IconBlock Icon="Eraser"
+                                  Foreground="#74966a"/>
+                </Button.Content>
+            </Button>
 
-        <Button Style="{StaticResource NumbersButton}"
-                x:Name="Number_5"
-                Grid.Column="1"
-                Grid.Row="4">
-            5
-        </Button>
+            <Button Style="{StaticResource NumbersButton}"
+                    x:Name="Number_7"
+                    Grid.Column="0"
+                    Grid.Row="3">
+                7
+            </Button>
 
-        <Button Style="{StaticResource NumbersButton}"
-                x:Name="Number_6"
-                Grid.Column="2"
-                Grid.Row="4">
-            6
-        </Button>
+            <Button Style="{StaticResource NumbersButton}"
+                    x:Name="Number_8"
+                    Grid.Column="1"
+                    Grid.Row="3">
+                8
+            </Button>
 
-        <Button Style="{StaticResource NumbersButton}"
-                x:Name="Number_1"
-                Grid.Column="0"
-                Grid.Row="5">
-            1
-        </Button>
+            <Button Style="{StaticResource NumbersButton}"
+                    x:Name="Number_9"
+                    Grid.Column="2"
+                    Grid.Row="3">
+                9
+            </Button>
 
-        <Button Style="{StaticResource NumbersButton}"
-                x:Name="Number_2"
-                Grid.Column="1"
-                Grid.Row="5">
-            2
-        </Button>
+            <Button Style="{StaticResource NumbersButton}"
+                    x:Name="Number_4"
+                    Grid.Column="0"
+                    Grid.Row="4">
+                4
+            </Button>
 
-        <Button Style="{StaticResource NumbersButton}"
-                x:Name="Number_3"
-                Grid.Column="2"
-                Grid.Row="5">
-            3
-        </Button>
+            <Button Style="{StaticResource NumbersButton}"
+                    x:Name="Number_5"
+                    Grid.Column="1"
+                    Grid.Row="4">
+                5
+            </Button>
 
-        <Button Style="{StaticResource NumbersButton}"
-                x:Name="Number_0"
-                Grid.Column="1"
-                Grid.Row="6">
-            0
-        </Button>
-    </Grid>
+            <Button Style="{StaticResource NumbersButton}"
+                    x:Name="Number_6"
+                    Grid.Column="2"
+                    Grid.Row="4">
+                6
+            </Button>
+
+            <Button Style="{StaticResource NumbersButton}"
+                    x:Name="Number_1"
+                    Grid.Column="0"
+                    Grid.Row="5">
+                1
+            </Button>
+
+            <Button Style="{StaticResource NumbersButton}"
+                    x:Name="Number_2"
+                    Grid.Column="1"
+                    Grid.Row="5">
+                2
+            </Button>
+
+            <Button Style="{StaticResource NumbersButton}"
+                    x:Name="Number_3"
+                    Grid.Column="2"
+                    Grid.Row="5">
+                3
+            </Button>
+
+            <Button Style="{StaticResource NumbersButton}"
+                    x:Name="Number_0"
+                    Grid.Column="1"
+                    Grid.Row="6">
+                0
+            </Button>
+
+            <!--
+            ========================
+                TITLE BAR
+            -->
+            <Rectangle Grid.Row="0"
+                       Grid.ColumnSpan="4"
+                       Grid.Column="0"
+                       MouseDown="TitleBar_MouseDown"
+                       Height="32"
+                       Fill="Transparent"/>
+
+            <TextBlock Name="WindowName"
+                       Foreground="#74966a"
+                       FontWeight="Bold"
+                       VerticalAlignment="Center"
+                       FontSize="18"
+                       Grid.ColumnSpan="2"
+                       Margin="8,2,0,0">
+                CALCULATOR
+            </TextBlock>
+
+            <StackPanel Orientation="Horizontal"
+                        Margin="0"
+                        Grid.Column="3"
+                        Grid.ColumnSpan="2"
+                        HorizontalAlignment="Right">
+                <Button Style="{StaticResource TitleBarButton_2}"
+                        Click="MinimizeButton_Click"
+                        Name="MinimizeButton"
+                        HorizontalAlignment="Right"
+                        Width="32"
+                        Height="32">
+                    <Button.Content>
+                        <fa:IconBlock Icon="Minus"
+                                      Foreground="#181616"
+                                      FontSize="22"/>
+                    </Button.Content>
+                </Button>
+
+                <Button Style="{StaticResource TitleBarButton}"
+                        Click="CloseButton_Click"
+                        Name="CloseButton"
+                        HorizontalAlignment="Right"
+                        Width="32"
+                        Height="32">
+                    <Button.Content>
+                        <fa:IconBlock Icon="Xmark"
+                                      Foreground="#181616"
+                                      FontSize="22"/>
+                    </Button.Content>
+                </Button>
+            </StackPanel>
+        </Grid>
+    </Border>
 </Window>
