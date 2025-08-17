@@ -355,7 +355,8 @@
                        VerticalAlignment="Center"
                        FontSize="18"
                        Grid.ColumnSpan="2"
-                       Margin="8,2,0,0">
+                       Margin="8,2,0,0"
+                       MouseDown="TitleBar_MouseDown">
                 CALCULATOR
             </TextBlock>
 
