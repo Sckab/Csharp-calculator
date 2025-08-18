@@ -6,18 +6,20 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>..\assets\icon.ico</ApplicationIcon>
+    <Title>Calculator</Title>
+    <AssemblyName>Calculator</AssemblyName>
   </PropertyGroup>
 
-<ItemGroup>
-  <Content Include="..\Assets\icon.ico">
-    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-  </Content>
-  <Content Include="..\Assets\icon_2.ico">
-    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-  </Content>
+  <ItemGroup>
+    <Content Include="..\Assets\icon.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\Assets\icon_2.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
 
-  <PackageReference Include="FontAwesome.Sharp" Version="6.6.0" />
-</ItemGroup>
-
+    <PackageReference Include="FontAwesome.Sharp" Version="6.6.0" />
+  </ItemGroup>
 
 </Project>

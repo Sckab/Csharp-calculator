@@ -4,6 +4,7 @@ using Calculator;
 using Globals;
 using System.Globalization;
 using UiHelper;
+using OtherBtns;
 
 namespace OperationsBtns;
 
@@ -18,88 +19,105 @@ public class Operation_Class
 
     public void Addition(object sender, RoutedEventArgs e)
     {
-        if (_window.Display != null && _window.Display.Content != null &&
-            !string.IsNullOrEmpty(_window.Display.Content.ToString()))
-        {
-            if (GlobalVariables.IsSecondNumber == false)
-            {
-                _window.Display.Content += "+";
-                GlobalVariables.Operation = '+';
-                GlobalVariables.IsSecondNumber = true;
-            }
-            else if (GlobalVariables.IsSecondNumber == true)
-            {
+        if (_window.Display == null || _window.Display.Content == null)
+            return;
 
-            }
+        if (!GlobalVariables.IsSecondNumber)
+        {
+            _window.Display.Content += "+";
+            GlobalVariables.Operation = '+';
+            GlobalVariables.IsSecondNumber = true;
+        }
+        else
+        {
+            if (!string.IsNullOrEmpty(GlobalVariables.SecondNumber))
+                Equals(sender, e);
+
+            GlobalVariables.Operation = '+';
+            GlobalVariables.SecondNumber = "";
+            GlobalVariables.IsSecondNumber = true;
+
+            _window.Display.Content = Other_Class.FormatNumber(GlobalVariables.FirstNumber, GlobalVariables.FirstHasComma) + "+";
         }
     }
 
     public void Subtraction(object sender, RoutedEventArgs e)
     {
-        var disp = _window.Display?.Content?.ToString() ?? "";
+        if (_window.Display == null || _window.Display.Content == null)
+            return;
+
+        if (!GlobalVariables.IsSecondNumber && string.IsNullOrEmpty(GlobalVariables.FirstNumber))
+        {
+            _window.Display.Content += "-";
+            GlobalVariables.FirstNumber = "-";
+            GlobalVariables.IsFirstNegative = true;
+            return;
+        }
 
         if (!GlobalVariables.IsSecondNumber)
         {
-            if (string.IsNullOrEmpty(GlobalVariables.FirstNumber) && !GlobalVariables.IsFirstNegative)
-            {
-                _window.Display.Content += "-";
-                GlobalVariables.FirstNumber += "-";
-                GlobalVariables.IsFirstNegative = true;
-            }
-            else if (!string.IsNullOrEmpty(GlobalVariables.FirstNumber))
-            {
-                _window.Display.Content += "-";
-                GlobalVariables.Operation = '-';
-                GlobalVariables.IsSecondNumber = true;
-            }
+            _window.Display.Content += "-";
+            GlobalVariables.Operation = '-';
+            GlobalVariables.IsSecondNumber = true;
         }
-        else if (GlobalVariables.IsSecondNumber)
+        else
         {
-            if (GlobalVariables.Operation == '+')
-                GlobalVariables.Operation = '-';
-            else if (GlobalVariables.Operation == '-')
-                GlobalVariables.Operation = '+';
+            if (!string.IsNullOrEmpty(GlobalVariables.SecondNumber))
+                Equals(sender, e);
 
-            string text = GlobalVariables.FirstNumber + GlobalVariables.Operation + GlobalVariables.SecondNumber.Replace('.', ',');
-            _window.Display.Content = text;
+            GlobalVariables.Operation = '-';
+            GlobalVariables.SecondNumber = "";
+            GlobalVariables.IsSecondNumber = true;
+
+            _window.Display.Content = Other_Class.FormatNumber(GlobalVariables.FirstNumber, GlobalVariables.FirstHasComma) + "-";
         }
     }
 
-
-
     public void Moltiplication(object sender, RoutedEventArgs e)
     {
-        if (_window.Display != null && _window.Display.Content != null &&
-            !string.IsNullOrEmpty(_window.Display.Content.ToString()))
-        {
-            if (GlobalVariables.IsSecondNumber == false)
-            {
-                _window.Display.Content += "×";
-                GlobalVariables.Operation = '*';
-                GlobalVariables.IsSecondNumber = true;
-            }
-            else if (GlobalVariables.IsSecondNumber == true)
-            {
+        if (_window.Display == null || _window.Display.Content == null)
+            return;
 
-            }
+        if (!GlobalVariables.IsSecondNumber)
+        {
+            _window.Display.Content += "×";
+            GlobalVariables.Operation = '*';
+            GlobalVariables.IsSecondNumber = true;
+        }
+        else
+        {
+            if (!string.IsNullOrEmpty(GlobalVariables.SecondNumber))
+                Equals(sender, e);
+
+            GlobalVariables.Operation = '*';
+            GlobalVariables.SecondNumber = "";
+            GlobalVariables.IsSecondNumber = true;
+
+            _window.Display.Content = Other_Class.FormatNumber(GlobalVariables.FirstNumber, GlobalVariables.FirstHasComma) + "×";
         }
     }
 
     public void Division(object sender, RoutedEventArgs e)
     {
-        if (_window.Display != null && _window.Display.Content != null &&
-            !string.IsNullOrEmpty(_window.Display.Content.ToString()))
-        {
-            if (GlobalVariables.IsSecondNumber == false)
-            {
-                _window.Display.Content += "÷";
-                GlobalVariables.Operation = '/';
-                GlobalVariables.IsSecondNumber = true;
-            }
-            else if (GlobalVariables.IsSecondNumber == true)
-            {
+        if (_window.Display == null || _window.Display.Content == null)
+            return;
 
-            }
+        if (!GlobalVariables.IsSecondNumber)
+        {
+            _window.Display.Content += "÷";
+            GlobalVariables.Operation = '/';
+            GlobalVariables.IsSecondNumber = true;
+        }
+        else
+        {
+            if (!string.IsNullOrEmpty(GlobalVariables.SecondNumber))
+                Equals(sender, e);
+
+            GlobalVariables.Operation = '/';
+            GlobalVariables.SecondNumber = "";
+            GlobalVariables.IsSecondNumber = true;
+
+            _window.Display.Content = Other_Class.FormatNumber(GlobalVariables.FirstNumber, GlobalVariables.FirstHasComma) + "÷";
         }
     }
 
@@ -142,7 +160,7 @@ public class Operation_Class
 
         if (string.IsNullOrEmpty(GlobalVariables.SecondNumber))
         {
-            _window.Display.Content = GlobalVariables.FirstNumber.Replace('.', ',');
+            _window.Display.Content = Other_Class.FormatNumber(GlobalVariables.FirstNumber, GlobalVariables.FirstHasComma);
             return;
         }
 
@@ -157,18 +175,9 @@ public class Operation_Class
         double result = 0;
         switch (GlobalVariables.Operation)
         {
-            case '+':
-                result = first + second;
-                break;
-
-            case '-':
-                result = first - second;
-                break;
-
-            case '*':
-                result = first * second;
-                break;
-
+            case '+': result = first + second; break;
+            case '-': result = first - second; break;
+            case '*': result = first * second; break;
             case '/':
                 if (Math.Abs(second) < double.Epsilon)
                 {
@@ -178,19 +187,20 @@ public class Operation_Class
                 }
                 result = first / second;
                 break;
-
-            default:
-                return;
+            default: return;
         }
 
         string resultInternal = result.ToString(CultureInfo.InvariantCulture);
-        UiHelper_Class.SetDisplayAndVariable(_window, resultInternal, false);
 
-        GlobalVariables.IsSecondNumber = false;
-        GlobalVariables.SecondNumber = "";
-        GlobalVariables.Operation = '\0';
+        GlobalVariables.FirstNumber = resultInternal;
         GlobalVariables.FirstHasComma = resultInternal.Contains('.');
+        GlobalVariables.SecondNumber = "";
         GlobalVariables.SecondHasComma = false;
+        GlobalVariables.Operation = '\0';
+        GlobalVariables.IsSecondNumber = false;
         GlobalVariables.IsError = false;
+
+        _window.Display.Content = Other_Class.FormatNumber(GlobalVariables.FirstNumber, GlobalVariables.FirstHasComma);
     }
+
 }

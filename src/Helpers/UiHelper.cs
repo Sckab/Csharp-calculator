@@ -3,6 +3,7 @@ using System.Windows.Controls;
 using System.Globalization;
 using Calculator;
 using Globals;
+using OtherBtns;
 
 namespace UiHelper;
 
@@ -21,17 +22,33 @@ public class UiHelper_Class
         rawNumber ??= "";
 
         string internalText = rawNumber.Replace(',', '.');
-        string displayText = string.IsNullOrEmpty(internalText) ? "" : internalText.Replace('.', ',');
+
+        if (internalText == ".") internalText = "0.";
+        if (internalText == "-.") internalText = "-0.";
 
         if (isSecondNumber)
         {
             GlobalVariables.SecondNumber = internalText;
-            window.Display.Content = displayText;
+            GlobalVariables.SecondHasComma = internalText.Contains(".");
         }
         else
         {
             GlobalVariables.FirstNumber = internalText;
-            window.Display.Content = displayText;
+            GlobalVariables.FirstHasComma = internalText.Contains(".");
         }
+
+        string opVis =
+            GlobalVariables.Operation == '\0' ? "" :
+            GlobalVariables.Operation == '*' ? "×" :
+            GlobalVariables.Operation == '/' ? "÷" :
+            GlobalVariables.Operation.ToString();
+
+        string firstDisp = Other_Class.FormatNumber(GlobalVariables.FirstNumber, GlobalVariables.FirstHasComma);
+        string secondDisp = Other_Class.FormatNumber(GlobalVariables.SecondNumber, GlobalVariables.SecondHasComma);
+
+        string displayExpr = firstDisp + (string.IsNullOrEmpty(opVis) ? "" : opVis) + secondDisp;
+
+        window.Display.Content = displayExpr;
     }
+
 }

@@ -2,7 +2,6 @@ using System.Windows;
 using System.Windows.Controls;
 using Calculator;
 using Globals;
-using UiHelper;
 
 namespace OtherBtns;
 
@@ -13,6 +12,33 @@ public class Other_Class
     public Other_Class(MainWindow window)
     {
         _window = window;
+    }
+
+    public static string FormatNumber(string number, bool hasComma = false)
+    {
+        if (string.IsNullOrEmpty(number))
+            return "";
+
+        bool isNegative = number.StartsWith("-");
+        if (isNegative)
+            number = number.Substring(1);
+
+        string[] parts = number.Split('.');
+        string integerPart = parts[0];
+        string decimalPart = parts.Length > 1 ? parts[1] : "";
+
+        string formattedInt = string.IsNullOrEmpty(integerPart) ? "0" : string.Format("{0:N0}", long.Parse(integerPart));
+
+        string result;
+
+        if (decimalPart.Length > 0)
+            result = $"{formattedInt},{decimalPart}";
+        else if (hasComma)
+            result = $"{formattedInt},";
+        else
+            result = formattedInt;
+
+        return isNegative ? "-" + result : result;
     }
 
     public void Comma(object sender, RoutedEventArgs e)
@@ -32,9 +58,9 @@ public class Other_Class
             GlobalVariables.SecondHasComma = true;
         }
 
-        // Ricostruisci la label completa
-        string first = GlobalVariables.FirstNumber.Replace('.', ',');
-        string second = GlobalVariables.SecondNumber.Replace('.', ',');
+        string first = FormatNumber(GlobalVariables.FirstNumber, GlobalVariables.FirstHasComma);
+        string second = FormatNumber(GlobalVariables.SecondNumber, GlobalVariables.SecondHasComma);
+
         string op = GlobalVariables.Operation == '\0' ? "" :
                     (GlobalVariables.Operation == '*' ? "×" :
                      GlobalVariables.Operation == '/' ? "÷" :
@@ -54,7 +80,7 @@ public class Other_Class
             else
                 GlobalVariables.FirstNumber = "-" + GlobalVariables.FirstNumber;
 
-            _window.Display.Content = GlobalVariables.FirstNumber +
+            _window.Display.Content = FormatNumber(GlobalVariables.FirstNumber, GlobalVariables.FirstHasComma) +
                                       (GlobalVariables.Operation != '\0' ? GlobalVariables.Operation.ToString() : "");
         }
         else
@@ -66,9 +92,9 @@ public class Other_Class
             else if (GlobalVariables.Operation == '+')
                 GlobalVariables.Operation = '-';
 
-            _window.Display.Content = GlobalVariables.FirstNumber +
+            _window.Display.Content = FormatNumber(GlobalVariables.FirstNumber, GlobalVariables.FirstHasComma) +
                                       GlobalVariables.Operation +
-                                      GlobalVariables.SecondNumber;
+                                      FormatNumber(GlobalVariables.SecondNumber, GlobalVariables.SecondHasComma);
         }
     }
 }

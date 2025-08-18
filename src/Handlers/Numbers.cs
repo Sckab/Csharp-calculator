@@ -2,6 +2,8 @@ using System.Windows;
 using System.Windows.Controls;
 using Calculator;
 using Globals;
+using UiHelper;
+using OtherBtns;
 
 namespace NumbersBtns;
 
@@ -13,323 +15,329 @@ public class Number_Class
     {
         _window = window;
     }
+
+    private void UpdateDisplay()
+    {
+        string first = Other_Class.FormatNumber(GlobalVariables.FirstNumber, GlobalVariables.FirstHasComma);
+        string second = Other_Class.FormatNumber(GlobalVariables.SecondNumber, GlobalVariables.SecondHasComma);
+
+        string opVis = GlobalVariables.Operation switch
+        {
+            '*' => "×",
+            '/' => "÷",
+            _ => GlobalVariables.Operation == '\0' ? "" : GlobalVariables.Operation.ToString()
+        };
+
+        _window.Display.Content = first + opVis + second;
+    }
+
+
+    private string FormatNumberForDisplay(string number)
+    {
+        if (string.IsNullOrEmpty(number))
+            return "";
+
+        string intPart = number;
+        string decimalPart = "";
+
+        if (number.Contains('.'))
+        {
+            var parts = number.Split('.');
+            intPart = parts[0];
+            decimalPart = parts[1];
+        }
+
+        var sb = new System.Text.StringBuilder();
+        int count = 0;
+        for (int i = intPart.Length - 1; i >= 0; i--)
+        {
+            sb.Insert(0, intPart[i]);
+            count++;
+            if (count % 3 == 0 && i != 0)
+                sb.Insert(0, ".");
+        }
+
+        return decimalPart != "" ? sb.ToString() + "," + decimalPart : sb.ToString();
+    }
+
+
     public void BtnNumberClick_0(object sender, RoutedEventArgs e)
     {
-        _window.Display.Content += "0";
+        var btn = sender as Button;
+        string digit = btn?.Content.ToString() ?? "0";
 
-        if (GlobalVariables.IsError == true)
+        if (GlobalVariables.IsError)
         {
-            _window.Display.Content = "0";
+            GlobalVariables.FirstNumber = digit;
+            GlobalVariables.SecondNumber = "";
             GlobalVariables.IsError = false;
             GlobalVariables.IsSecondNumber = false;
+            GlobalVariables.Operation = '\0';
+            UpdateDisplay();
+            return;
+        }
 
-            if (GlobalVariables.IsSecondNumber == false)
-            {
-                GlobalVariables.FirstNumber += "0";
-            }
-            else
-            {
-                GlobalVariables.SecondNumber += "0";
-            }
+        if (!GlobalVariables.IsSecondNumber)
+        {
+            GlobalVariables.FirstNumber += digit;
         }
         else
         {
-            if (GlobalVariables.IsSecondNumber == false)
-            {
-                GlobalVariables.FirstNumber += "0";
-            }
-            else
-            {
-                GlobalVariables.SecondNumber += "0";
-            }
+            GlobalVariables.SecondNumber += digit;
         }
+
+        UpdateDisplay();
     }
 
     public void BtnNumberClick_1(object sender, RoutedEventArgs e)
     {
-        _window.Display.Content += "1";
+        var btn = sender as Button;
+        string digit = btn?.Content.ToString() ?? "1";
 
-        if (GlobalVariables.IsError == true)
+        if (GlobalVariables.IsError)
         {
-            _window.Display.Content = "1";
+            GlobalVariables.FirstNumber = digit;
+            GlobalVariables.SecondNumber = "";
             GlobalVariables.IsError = false;
             GlobalVariables.IsSecondNumber = false;
+            GlobalVariables.Operation = '\0';
+            UpdateDisplay();
+            return;
+        }
 
-            if (GlobalVariables.IsSecondNumber == false)
-            {
-                GlobalVariables.FirstNumber += "1";
-            }
-            else
-            {
-                GlobalVariables.SecondNumber += "1";
-            }
+        if (!GlobalVariables.IsSecondNumber)
+        {
+            GlobalVariables.FirstNumber += digit;
         }
         else
         {
-            if (GlobalVariables.IsSecondNumber == false)
-            {
-                GlobalVariables.FirstNumber += "1";
-            }
-            else
-            {
-                GlobalVariables.SecondNumber += "1";
-            }
+            GlobalVariables.SecondNumber += digit;
         }
+
+        UpdateDisplay();
     }
 
     public void BtnNumberClick_2(object sender, RoutedEventArgs e)
     {
-        _window.Display.Content += "2";
+        var btn = sender as Button;
+        string digit = btn?.Content.ToString() ?? "2";
 
-        if (GlobalVariables.IsError == true)
+        if (GlobalVariables.IsError)
         {
-            _window.Display.Content = "2";
+            GlobalVariables.FirstNumber = digit;
+            GlobalVariables.SecondNumber = "";
             GlobalVariables.IsError = false;
             GlobalVariables.IsSecondNumber = false;
+            GlobalVariables.Operation = '\0';
+            UpdateDisplay();
+            return;
+        }
 
-            if (GlobalVariables.IsSecondNumber == false)
-            {
-                GlobalVariables.FirstNumber += "2";
-            }
-            else
-            {
-                GlobalVariables.SecondNumber += "2";
-            }
+        if (!GlobalVariables.IsSecondNumber)
+        {
+            GlobalVariables.FirstNumber += digit;
         }
         else
         {
-            if (GlobalVariables.IsSecondNumber == false)
-            {
-                GlobalVariables.FirstNumber += "2";
-            }
-            else
-            {
-                GlobalVariables.SecondNumber += "2";
-            }
+            GlobalVariables.SecondNumber += digit;
         }
+
+        UpdateDisplay();
     }
 
     public void BtnNumberClick_3(object sender, RoutedEventArgs e)
     {
-        _window.Display.Content += "3";
+        var btn = sender as Button;
+        string digit = btn?.Content.ToString() ?? "3";
 
-        if (GlobalVariables.IsError == true)
+        if (GlobalVariables.IsError)
         {
-            _window.Display.Content = "3";
+            GlobalVariables.FirstNumber = digit;
+            GlobalVariables.SecondNumber = "";
             GlobalVariables.IsError = false;
             GlobalVariables.IsSecondNumber = false;
+            GlobalVariables.Operation = '\0';
+            UpdateDisplay();
+            return;
+        }
 
-            if (GlobalVariables.IsSecondNumber == false)
-            {
-                GlobalVariables.FirstNumber += "3";
-            }
-            else
-            {
-                GlobalVariables.SecondNumber += "3";
-            }
+        if (!GlobalVariables.IsSecondNumber)
+        {
+            GlobalVariables.FirstNumber += digit;
         }
         else
         {
-            if (GlobalVariables.IsSecondNumber == false)
-            {
-                GlobalVariables.FirstNumber += "3";
-            }
-            else
-            {
-                GlobalVariables.SecondNumber += "3";
-            }
+            GlobalVariables.SecondNumber += digit;
         }
+
+        UpdateDisplay();
     }
 
     public void BtnNumberClick_4(object sender, RoutedEventArgs e)
     {
-        _window.Display.Content += "4";
+        var btn = sender as Button;
+        string digit = btn?.Content.ToString() ?? "4";
 
-        if (GlobalVariables.IsError == true)
+        if (GlobalVariables.IsError)
         {
-            _window.Display.Content = "4";
+            GlobalVariables.FirstNumber = digit;
+            GlobalVariables.SecondNumber = "";
             GlobalVariables.IsError = false;
             GlobalVariables.IsSecondNumber = false;
+            GlobalVariables.Operation = '\0';
+            UpdateDisplay();
+            return;
+        }
 
-            if (GlobalVariables.IsSecondNumber == false)
-            {
-                GlobalVariables.FirstNumber += "4";
-            }
-            else
-            {
-                GlobalVariables.SecondNumber += "4";
-            }
+        if (!GlobalVariables.IsSecondNumber)
+        {
+            GlobalVariables.FirstNumber += digit;
         }
         else
         {
-            if (GlobalVariables.IsSecondNumber == false)
-            {
-                GlobalVariables.FirstNumber += "4";
-            }
-            else
-            {
-                GlobalVariables.SecondNumber += "4";
-            }
+            GlobalVariables.SecondNumber += digit;
         }
+
+        UpdateDisplay();
     }
 
     public void BtnNumberClick_5(object sender, RoutedEventArgs e)
     {
-        _window.Display.Content += "5";
+        var btn = sender as Button;
+        string digit = btn?.Content.ToString() ?? "5";
 
-        if (GlobalVariables.IsError == true)
+        if (GlobalVariables.IsError)
         {
-            _window.Display.Content = "5";
+            GlobalVariables.FirstNumber = digit;
+            GlobalVariables.SecondNumber = "";
             GlobalVariables.IsError = false;
             GlobalVariables.IsSecondNumber = false;
+            GlobalVariables.Operation = '\0';
+            UpdateDisplay();
+            return;
+        }
 
-            if (GlobalVariables.IsSecondNumber == false)
-            {
-                GlobalVariables.FirstNumber += "5";
-            }
-            else
-            {
-                GlobalVariables.SecondNumber += "5";
-            }
+        if (!GlobalVariables.IsSecondNumber)
+        {
+            GlobalVariables.FirstNumber += digit;
         }
         else
         {
-            if (GlobalVariables.IsSecondNumber == false)
-            {
-                GlobalVariables.FirstNumber += "5";
-            }
-            else
-            {
-                GlobalVariables.SecondNumber += "5";
-            }
+            GlobalVariables.SecondNumber += digit;
         }
+
+        UpdateDisplay();
     }
 
     public void BtnNumberClick_6(object sender, RoutedEventArgs e)
     {
-        _window.Display.Content += "6";
+        var btn = sender as Button;
+        string digit = btn?.Content.ToString() ?? "6";
 
-        if (GlobalVariables.IsError == true)
+        if (GlobalVariables.IsError)
         {
-            _window.Display.Content = "6";
+            GlobalVariables.FirstNumber = digit;
+            GlobalVariables.SecondNumber = "";
             GlobalVariables.IsError = false;
             GlobalVariables.IsSecondNumber = false;
+            GlobalVariables.Operation = '\0';
+            UpdateDisplay();
+            return;
+        }
 
-            if (GlobalVariables.IsSecondNumber == false)
-            {
-                GlobalVariables.FirstNumber += "6";
-            }
-            else
-            {
-                GlobalVariables.SecondNumber += "6";
-            }
+        if (!GlobalVariables.IsSecondNumber)
+        {
+            GlobalVariables.FirstNumber += digit;
         }
         else
         {
-            if (GlobalVariables.IsSecondNumber == false)
-            {
-                GlobalVariables.FirstNumber += "6";
-            }
-            else
-            {
-                GlobalVariables.SecondNumber += "6";
-            }
+            GlobalVariables.SecondNumber += digit;
         }
+
+        UpdateDisplay();
     }
 
     public void BtnNumberClick_7(object sender, RoutedEventArgs e)
     {
-        _window.Display.Content += "7";
+        var btn = sender as Button;
+        string digit = btn?.Content.ToString() ?? "7";
 
-        if (GlobalVariables.IsError == true)
+        if (GlobalVariables.IsError)
         {
-            _window.Display.Content = "7";
+            GlobalVariables.FirstNumber = digit;
+            GlobalVariables.SecondNumber = "";
             GlobalVariables.IsError = false;
             GlobalVariables.IsSecondNumber = false;
+            GlobalVariables.Operation = '\0';
+            UpdateDisplay();
+            return;
+        }
 
-            if (GlobalVariables.IsSecondNumber == false)
-            {
-                GlobalVariables.FirstNumber += "7";
-            }
-            else
-            {
-                GlobalVariables.SecondNumber += "7";
-            }
+        if (!GlobalVariables.IsSecondNumber)
+        {
+            GlobalVariables.FirstNumber += digit;
         }
         else
         {
-            if (GlobalVariables.IsSecondNumber == false)
-            {
-                GlobalVariables.FirstNumber += "7";
-            }
-            else
-            {
-                GlobalVariables.SecondNumber += "7";
-            }
+            GlobalVariables.SecondNumber += digit;
         }
+
+        UpdateDisplay();
     }
 
     public void BtnNumberClick_8(object sender, RoutedEventArgs e)
     {
-        _window.Display.Content += "8";
+        var btn = sender as Button;
+        string digit = btn?.Content.ToString() ?? "8";
 
-        if (GlobalVariables.IsError == true)
+        if (GlobalVariables.IsError)
         {
-            _window.Display.Content = "8";
+            GlobalVariables.FirstNumber = digit;
+            GlobalVariables.SecondNumber = "";
             GlobalVariables.IsError = false;
             GlobalVariables.IsSecondNumber = false;
+            GlobalVariables.Operation = '\0';
+            UpdateDisplay();
+            return;
+        }
 
-            if (GlobalVariables.IsSecondNumber == false)
-            {
-                GlobalVariables.FirstNumber += "8";
-            }
-            else
-            {
-                GlobalVariables.SecondNumber += "8";
-            }
+        if (!GlobalVariables.IsSecondNumber)
+        {
+            GlobalVariables.FirstNumber += digit;
         }
         else
         {
-            if (GlobalVariables.IsSecondNumber == false)
-            {
-                GlobalVariables.FirstNumber += "8";
-            }
-            else
-            {
-                GlobalVariables.SecondNumber += "8";
-            }
+            GlobalVariables.SecondNumber += digit;
         }
+
+        UpdateDisplay();
     }
 
     public void BtnNumberClick_9(object sender, RoutedEventArgs e)
     {
-        _window.Display.Content += "9";
+        var btn = sender as Button;
+        string digit = btn?.Content.ToString() ?? "9";
 
-        if (GlobalVariables.IsError == true)
+        if (GlobalVariables.IsError)
         {
-            _window.Display.Content = "9";
+            GlobalVariables.FirstNumber = digit;
+            GlobalVariables.SecondNumber = "";
             GlobalVariables.IsError = false;
             GlobalVariables.IsSecondNumber = false;
+            GlobalVariables.Operation = '\0';
+            UpdateDisplay();
+            return;
+        }
 
-            if (GlobalVariables.IsSecondNumber == false)
-            {
-                GlobalVariables.FirstNumber += "9";
-            }
-            else
-            {
-                GlobalVariables.SecondNumber += "9";
-            }
+        if (!GlobalVariables.IsSecondNumber)
+        {
+            GlobalVariables.FirstNumber += digit;
         }
         else
         {
-            if (GlobalVariables.IsSecondNumber == false)
-            {
-                GlobalVariables.FirstNumber += "9";
-            }
-            else
-            {
-                GlobalVariables.SecondNumber += "9";
-            }
+            GlobalVariables.SecondNumber += digit;
         }
+
+        UpdateDisplay();
     }
 }
