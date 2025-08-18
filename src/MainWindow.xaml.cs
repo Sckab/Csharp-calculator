@@ -66,44 +66,53 @@ public partial class MainWindow : Window
         _other = new Other_Class(this);
 
         Comma.Click += _other.Comma;
+        PlusMinus.Click += _other.PlusMinus;
 
     }
 
     public void BtnDelete1(object sender, RoutedEventArgs e)
     {
-        string disp = this.Display?.Content?.ToString() ?? "";
-        if (string.IsNullOrEmpty(disp)) return;
-
-        if (GlobalVariables.IsSecondNumber)
+        if (!GlobalVariables.IsSecondNumber)
         {
-            if (string.IsNullOrEmpty(GlobalVariables.SecondNumber))
+            if (!string.IsNullOrEmpty(GlobalVariables.FirstNumber))
             {
-                // se non c'è secondo numero, potresti voler rimuovere l'operatore invece
-                return;
+                GlobalVariables.FirstNumber = GlobalVariables.FirstNumber.Remove(GlobalVariables.FirstNumber.Length - 1);
+                GlobalVariables.FirstHasComma = GlobalVariables.FirstNumber.Contains(".");
+
+                char LastChar = Display.Content.ToString()[Display.Content.ToString().Length - 1];
+
+                if (LastChar == '-')
+                {
+                    GlobalVariables.IsFirstNegative = false;
+                }
             }
 
-            GlobalVariables.SecondNumber = GlobalVariables.SecondNumber.Remove(GlobalVariables.SecondNumber.Length - 1);
-            GlobalVariables.SecondHasComma = GlobalVariables.SecondNumber.Contains(".");
-            // aggiorna display usando il metodo d'istanza
-            UiHelper_Class.SetDisplayAndVariable(this, GlobalVariables.SecondNumber.Replace('.', ','), true);
+            this.Display.Content = GlobalVariables.FirstNumber.Replace('.', ',');
         }
         else
         {
-            if (string.IsNullOrEmpty(GlobalVariables.FirstNumber))
+            if (!string.IsNullOrEmpty(GlobalVariables.SecondNumber))
             {
-                this.Display.Content = "0";
-                return;
+                GlobalVariables.SecondNumber = GlobalVariables.SecondNumber.Remove(GlobalVariables.SecondNumber.Length - 1);
+                GlobalVariables.SecondHasComma = GlobalVariables.SecondNumber.Contains(".");
+            }
+            else
+            {
+                GlobalVariables.Operation = '\0';
+                GlobalVariables.IsSecondNumber = false;
             }
 
-            GlobalVariables.FirstNumber = GlobalVariables.FirstNumber.Remove(GlobalVariables.FirstNumber.Length - 1);
-            GlobalVariables.FirstHasComma = GlobalVariables.FirstNumber.Contains(".");
-            UiHelper_Class.SetDisplayAndVariable(this, GlobalVariables.FirstNumber.Replace('.', ','), false);
-        }
+            string displayText = GlobalVariables.FirstNumber;
 
-        // se è tutto vuoto, mostra 0
-        if (!GlobalVariables.IsSecondNumber && string.IsNullOrEmpty(GlobalVariables.FirstNumber))
-            this.Display.Content = "0";
+            if (GlobalVariables.Operation != '\0')
+                displayText += GlobalVariables.Operation;
+
+            displayText += GlobalVariables.SecondNumber.Replace('.', ',');
+
+            this.Display.Content = displayText;
+        }
     }
+
 
 
     public void BtnDeleteAll(object sender, RoutedEventArgs e)
@@ -117,6 +126,7 @@ public partial class MainWindow : Window
             GlobalVariables.FirstNumber = "";
             GlobalVariables.FirstHasComma = false;
             GlobalVariables.SecondHasComma = false;
+            GlobalVariables.IsFirstNegative = false;
         }
     }
 

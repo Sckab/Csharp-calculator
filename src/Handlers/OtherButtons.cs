@@ -43,4 +43,32 @@ public class Other_Class
         _window.Display.Content = string.IsNullOrEmpty(op) ? first : first + op + second;
     }
 
+    public void PlusMinus(object sender, RoutedEventArgs e)
+    {
+        if (!GlobalVariables.IsSecondNumber)
+        {
+            if (string.IsNullOrEmpty(GlobalVariables.FirstNumber)) return;
+
+            if (GlobalVariables.FirstNumber.StartsWith("-"))
+                GlobalVariables.FirstNumber = GlobalVariables.FirstNumber.Substring(1);
+            else
+                GlobalVariables.FirstNumber = "-" + GlobalVariables.FirstNumber;
+
+            _window.Display.Content = GlobalVariables.FirstNumber +
+                                      (GlobalVariables.Operation != '\0' ? GlobalVariables.Operation.ToString() : "");
+        }
+        else
+        {
+            if (string.IsNullOrEmpty(GlobalVariables.SecondNumber)) return;
+
+            if (GlobalVariables.Operation == '-')
+                GlobalVariables.Operation = '+';
+            else if (GlobalVariables.Operation == '+')
+                GlobalVariables.Operation = '-';
+
+            _window.Display.Content = GlobalVariables.FirstNumber +
+                                      GlobalVariables.Operation +
+                                      GlobalVariables.SecondNumber;
+        }
+    }
 }

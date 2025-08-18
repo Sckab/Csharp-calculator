@@ -15,4 +15,6 @@ public static class GlobalVariables
     public static bool FirstHasComma = false;
 
     public static bool SecondHasComma = false;
+
+    public static bool IsFirstNegative = false;
 }

@@ -1,4 +1,3 @@
-using System.Security.Cryptography.X509Certificates;
 using System.Windows;
 using System.Windows.Controls;
 using Calculator;
@@ -37,21 +36,36 @@ public class Operation_Class
 
     public void Subtraction(object sender, RoutedEventArgs e)
     {
-        if (_window.Display != null && _window.Display.Content != null &&
-            !string.IsNullOrEmpty(_window.Display.Content.ToString()))
+        var disp = _window.Display?.Content?.ToString() ?? "";
+
+        if (!GlobalVariables.IsSecondNumber)
         {
-            if (GlobalVariables.IsSecondNumber == false)
+            if (string.IsNullOrEmpty(GlobalVariables.FirstNumber) && !GlobalVariables.IsFirstNegative)
+            {
+                _window.Display.Content += "-";
+                GlobalVariables.FirstNumber += "-";
+                GlobalVariables.IsFirstNegative = true;
+            }
+            else if (!string.IsNullOrEmpty(GlobalVariables.FirstNumber))
             {
                 _window.Display.Content += "-";
                 GlobalVariables.Operation = '-';
                 GlobalVariables.IsSecondNumber = true;
             }
-            else if (GlobalVariables.IsSecondNumber == true)
-            {
+        }
+        else if (GlobalVariables.IsSecondNumber)
+        {
+            if (GlobalVariables.Operation == '+')
+                GlobalVariables.Operation = '-';
+            else if (GlobalVariables.Operation == '-')
+                GlobalVariables.Operation = '+';
 
-            }
+            string text = GlobalVariables.FirstNumber + GlobalVariables.Operation + GlobalVariables.SecondNumber.Replace('.', ',');
+            _window.Display.Content = text;
         }
     }
+
+
 
     public void Moltiplication(object sender, RoutedEventArgs e)
     {
