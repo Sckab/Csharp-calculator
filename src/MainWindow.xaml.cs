@@ -11,6 +11,8 @@ using System.Windows.Shapes;
 using Globals;
 using NumbersBtns;
 using OperationsBtns;
+using OtherBtns;
+using UiHelper;
 
 namespace Calculator;
 
@@ -19,9 +21,11 @@ namespace Calculator;
 /// </summary>
 public partial class MainWindow : Window
 {
-    private Number _numbers;
+    private Number_Class _numbers;
 
     private Operation_Class _operation;
+
+    private Other_Class _other;
 
     public MainWindow()
     {
@@ -30,7 +34,7 @@ public partial class MainWindow : Window
         /*
          *  NUMBERS LOGIC
          */
-        _numbers = new Number(this);
+        _numbers = new Number_Class(this);
 
         Number_0.Click += _numbers.BtnNumberClick_0;
         Number_1.Click += _numbers.BtnNumberClick_1;
@@ -52,28 +56,55 @@ public partial class MainWindow : Window
         Subtraction.Click += _operation.Subtraction;
         Moltiplication.Click += _operation.Moltiplication;
         Division.Click += _operation.Division;
+        SquareRoot.Click += _operation.SquareRoot;
 
         Equal.Click += _operation.Equals;
+
+        /*
+         *  OTHER BUTTNONS LOGIC
+         */
+        _other = new Other_Class(this);
+
+        Comma.Click += _other.Comma;
 
     }
 
     public void BtnDelete1(object sender, RoutedEventArgs e)
     {
-        char LastChar = Display.Content.ToString()[Display.Content.ToString().Length - 1];
+        string disp = this.Display?.Content?.ToString() ?? "";
+        if (string.IsNullOrEmpty(disp)) return;
 
-        if (Display != null && Display.Content != null &&
-            !string.IsNullOrEmpty(Display.Content.ToString()))
+        if (GlobalVariables.IsSecondNumber)
         {
-            if (LastChar == '+' || LastChar == '-' || LastChar == '×' || LastChar == '÷')
+            if (string.IsNullOrEmpty(GlobalVariables.SecondNumber))
             {
-                GlobalVariables.IsSecondNumber = false;
-                GlobalVariables.Operation = '\0';
+                // se non c'è secondo numero, potresti voler rimuovere l'operatore invece
+                return;
             }
 
-            Display.Content = Display.Content.ToString()
-                               .Remove(Display.Content.ToString().Length - 1);
+            GlobalVariables.SecondNumber = GlobalVariables.SecondNumber.Remove(GlobalVariables.SecondNumber.Length - 1);
+            GlobalVariables.SecondHasComma = GlobalVariables.SecondNumber.Contains(".");
+            // aggiorna display usando il metodo d'istanza
+            UiHelper_Class.SetDisplayAndVariable(this, GlobalVariables.SecondNumber.Replace('.', ','), true);
         }
+        else
+        {
+            if (string.IsNullOrEmpty(GlobalVariables.FirstNumber))
+            {
+                this.Display.Content = "0";
+                return;
+            }
+
+            GlobalVariables.FirstNumber = GlobalVariables.FirstNumber.Remove(GlobalVariables.FirstNumber.Length - 1);
+            GlobalVariables.FirstHasComma = GlobalVariables.FirstNumber.Contains(".");
+            UiHelper_Class.SetDisplayAndVariable(this, GlobalVariables.FirstNumber.Replace('.', ','), false);
+        }
+
+        // se è tutto vuoto, mostra 0
+        if (!GlobalVariables.IsSecondNumber && string.IsNullOrEmpty(GlobalVariables.FirstNumber))
+            this.Display.Content = "0";
     }
+
 
     public void BtnDeleteAll(object sender, RoutedEventArgs e)
     {
@@ -83,6 +114,9 @@ public partial class MainWindow : Window
             Display.Content = "";
             GlobalVariables.IsSecondNumber = false;
             GlobalVariables.Operation = '\0';
+            GlobalVariables.FirstNumber = "";
+            GlobalVariables.FirstHasComma = false;
+            GlobalVariables.SecondHasComma = false;
         }
     }
 

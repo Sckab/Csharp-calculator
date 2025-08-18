@@ -3,6 +3,8 @@ using System.Windows;
 using System.Windows.Controls;
 using Calculator;
 using Globals;
+using System.Globalization;
+using UiHelper;
 
 namespace OperationsBtns;
 
@@ -87,74 +89,94 @@ public class Operation_Class
         }
     }
 
-    public void Equals(object sender, RoutedEventArgs e)
+    public void SquareRoot(object sender, RoutedEventArgs e)
     {
-        if (GlobalVariables.FirstNumber != "" || GlobalVariables.SecondNumber != "")
+        if (_window.Display != null && _window.Display.Content != null &&
+            !string.IsNullOrEmpty(_window.Display.Content.ToString()))
         {
-            int FirstNumberInt = Int32.Parse(GlobalVariables.FirstNumber);
-            int SecondNumberInt = Int32.Parse(GlobalVariables.SecondNumber);
-
-            switch (GlobalVariables.Operation)
+            if (GlobalVariables.IsSecondNumber == false)
             {
-                case '+':
-                    int ResultAdd;
+                if (!double.TryParse(GlobalVariables.FirstNumber, out double FirstNumberDouble))
+                {
+                    _window.Display.Content = "Invalid input";
+                    GlobalVariables.IsError = true;
+                    return;
+                }
 
-                    ResultAdd = FirstNumberInt + SecondNumberInt;
-                    _window.Display.Content = ResultAdd;
+                double ResultSqr;
 
-                    string ResultStringAdd = ResultAdd.ToString();
-                    GlobalVariables.IsSecondNumber = false;
-                    GlobalVariables.FirstNumber = ResultStringAdd;
-                    GlobalVariables.SecondNumber = "";
-                    break;
+                ResultSqr = Math.Sqrt(FirstNumberDouble);
+                string ResultStringSqr = ResultSqr.ToString("0.###");
 
-                case '-':
-                    int ResultSub;
+                _window.Display.Content = ResultStringSqr;
+                GlobalVariables.IsSecondNumber = false;
+                GlobalVariables.FirstNumber = ResultStringSqr;
+                GlobalVariables.SecondNumber = "";
+                GlobalVariables.Operation = '\0';
+            }
+            else if (GlobalVariables.IsSecondNumber == true)
+            {
 
-                    ResultSub = FirstNumberInt - SecondNumberInt;
-                    _window.Display.Content = ResultSub;
-
-                    string ResultStringSub = ResultSub.ToString();
-                    GlobalVariables.IsSecondNumber = false;
-                    GlobalVariables.FirstNumber = ResultStringSub;
-                    GlobalVariables.SecondNumber = "";
-                    break;
-
-                case '*':
-                    int ResultMolt;
-
-                    ResultMolt = FirstNumberInt * SecondNumberInt;
-                    _window.Display.Content = ResultMolt;
-
-                    string ResultStringMolt = ResultMolt.ToString();
-                    GlobalVariables.IsSecondNumber = false;
-                    GlobalVariables.FirstNumber = ResultStringMolt;
-                    GlobalVariables.SecondNumber = "";
-                    break;
-
-                case '/':
-                    if (SecondNumberInt != 0)
-                    {
-                        int ResultDiv;
-
-                        ResultDiv = FirstNumberInt / SecondNumberInt;
-                        _window.Display.Content = ResultDiv;
-
-                        string ResultStringDiv = ResultDiv.ToString();
-                        GlobalVariables.IsSecondNumber = false;
-                        GlobalVariables.FirstNumber = ResultStringDiv;
-                        GlobalVariables.SecondNumber = "";
-                        break;
-                    }
-                    else
-                    {
-                        _window.Display.Content = "Cannot divide by 0";
-                        break;
-                    }
-
-                default:
-                    break;
             }
         }
+    }
+
+    public void Equals(object sender, RoutedEventArgs e)
+    {
+        if (string.IsNullOrEmpty(GlobalVariables.FirstNumber) || GlobalVariables.Operation == '\0')
+            return;
+
+        if (string.IsNullOrEmpty(GlobalVariables.SecondNumber))
+        {
+            _window.Display.Content = GlobalVariables.FirstNumber.Replace('.', ',');
+            return;
+        }
+
+        if (!double.TryParse(GlobalVariables.FirstNumber, NumberStyles.Float, CultureInfo.InvariantCulture, out double first) ||
+            !double.TryParse(GlobalVariables.SecondNumber, NumberStyles.Float, CultureInfo.InvariantCulture, out double second))
+        {
+            _window.Display.Content = "Invalid input";
+            GlobalVariables.IsError = true;
+            return;
+        }
+
+        double result = 0;
+        switch (GlobalVariables.Operation)
+        {
+            case '+':
+                result = first + second;
+                break;
+
+            case '-':
+                result = first - second;
+                break;
+
+            case '*':
+                result = first * second;
+                break;
+
+            case '/':
+                if (Math.Abs(second) < double.Epsilon)
+                {
+                    _window.Display.Content = "Cannot divide by 0";
+                    GlobalVariables.IsError = true;
+                    return;
+                }
+                result = first / second;
+                break;
+
+            default:
+                return;
+        }
+
+        string resultInternal = result.ToString(CultureInfo.InvariantCulture);
+        UiHelper_Class.SetDisplayAndVariable(_window, resultInternal, false);
+
+        GlobalVariables.IsSecondNumber = false;
+        GlobalVariables.SecondNumber = "";
+        GlobalVariables.Operation = '\0';
+        GlobalVariables.FirstHasComma = resultInternal.Contains('.');
+        GlobalVariables.SecondHasComma = false;
+        GlobalVariables.IsError = false;
     }
 }

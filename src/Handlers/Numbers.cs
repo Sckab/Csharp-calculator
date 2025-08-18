@@ -5,11 +5,11 @@ using Globals;
 
 namespace NumbersBtns;
 
-public class Number
+public class Number_Class
 {
     private MainWindow _window;
 
-    public Number(MainWindow window)
+    public Number_Class(MainWindow window)
     {
         _window = window;
     }
@@ -17,13 +17,31 @@ public class Number
     {
         _window.Display.Content += "0";
 
-        if (GlobalVariables.IsSecondNumber == false)
+        if (GlobalVariables.IsError == true)
         {
-            GlobalVariables.FirstNumber += "0";
+            _window.Display.Content = "0";
+            GlobalVariables.IsError = false;
+            GlobalVariables.IsSecondNumber = false;
+
+            if (GlobalVariables.IsSecondNumber == false)
+            {
+                GlobalVariables.FirstNumber += "0";
+            }
+            else
+            {
+                GlobalVariables.SecondNumber += "0";
+            }
         }
         else
         {
-            GlobalVariables.SecondNumber += "0";
+            if (GlobalVariables.IsSecondNumber == false)
+            {
+                GlobalVariables.FirstNumber += "0";
+            }
+            else
+            {
+                GlobalVariables.SecondNumber += "0";
+            }
         }
     }
 
@@ -31,13 +49,31 @@ public class Number
     {
         _window.Display.Content += "1";
 
-        if (GlobalVariables.IsSecondNumber == false)
+        if (GlobalVariables.IsError == true)
         {
-            GlobalVariables.FirstNumber += "1";
+            _window.Display.Content = "1";
+            GlobalVariables.IsError = false;
+            GlobalVariables.IsSecondNumber = false;
+
+            if (GlobalVariables.IsSecondNumber == false)
+            {
+                GlobalVariables.FirstNumber += "1";
+            }
+            else
+            {
+                GlobalVariables.SecondNumber += "1";
+            }
         }
         else
         {
-            GlobalVariables.SecondNumber += "1";
+            if (GlobalVariables.IsSecondNumber == false)
+            {
+                GlobalVariables.FirstNumber += "1";
+            }
+            else
+            {
+                GlobalVariables.SecondNumber += "1";
+            }
         }
     }
 
@@ -45,13 +81,31 @@ public class Number
     {
         _window.Display.Content += "2";
 
-        if (GlobalVariables.IsSecondNumber == false)
+        if (GlobalVariables.IsError == true)
         {
-            GlobalVariables.FirstNumber += "2";
+            _window.Display.Content = "2";
+            GlobalVariables.IsError = false;
+            GlobalVariables.IsSecondNumber = false;
+
+            if (GlobalVariables.IsSecondNumber == false)
+            {
+                GlobalVariables.FirstNumber += "2";
+            }
+            else
+            {
+                GlobalVariables.SecondNumber += "2";
+            }
         }
         else
         {
-            GlobalVariables.SecondNumber += "2";
+            if (GlobalVariables.IsSecondNumber == false)
+            {
+                GlobalVariables.FirstNumber += "2";
+            }
+            else
+            {
+                GlobalVariables.SecondNumber += "2";
+            }
         }
     }
 
@@ -59,13 +113,31 @@ public class Number
     {
         _window.Display.Content += "3";
 
-        if (GlobalVariables.IsSecondNumber == false)
+        if (GlobalVariables.IsError == true)
         {
-            GlobalVariables.FirstNumber += "3";
+            _window.Display.Content = "3";
+            GlobalVariables.IsError = false;
+            GlobalVariables.IsSecondNumber = false;
+
+            if (GlobalVariables.IsSecondNumber == false)
+            {
+                GlobalVariables.FirstNumber += "3";
+            }
+            else
+            {
+                GlobalVariables.SecondNumber += "3";
+            }
         }
         else
         {
-            GlobalVariables.SecondNumber += "3";
+            if (GlobalVariables.IsSecondNumber == false)
+            {
+                GlobalVariables.FirstNumber += "3";
+            }
+            else
+            {
+                GlobalVariables.SecondNumber += "3";
+            }
         }
     }
 
@@ -73,26 +145,63 @@ public class Number
     {
         _window.Display.Content += "4";
 
-        if (GlobalVariables.IsSecondNumber == false)
+        if (GlobalVariables.IsError == true)
         {
-            GlobalVariables.FirstNumber += "4";
+            _window.Display.Content = "4";
+            GlobalVariables.IsError = false;
+            GlobalVariables.IsSecondNumber = false;
+
+            if (GlobalVariables.IsSecondNumber == false)
+            {
+                GlobalVariables.FirstNumber += "4";
+            }
+            else
+            {
+                GlobalVariables.SecondNumber += "4";
+            }
         }
         else
         {
-            GlobalVariables.SecondNumber += "4";
+            if (GlobalVariables.IsSecondNumber == false)
+            {
+                GlobalVariables.FirstNumber += "4";
+            }
+            else
+            {
+                GlobalVariables.SecondNumber += "4";
+            }
         }
     }
 
     public void BtnNumberClick_5(object sender, RoutedEventArgs e)
     {
         _window.Display.Content += "5";
-        if (GlobalVariables.IsSecondNumber == false)
+
+        if (GlobalVariables.IsError == true)
         {
-            GlobalVariables.FirstNumber += "5";
+            _window.Display.Content = "5";
+            GlobalVariables.IsError = false;
+            GlobalVariables.IsSecondNumber = false;
+
+            if (GlobalVariables.IsSecondNumber == false)
+            {
+                GlobalVariables.FirstNumber += "5";
+            }
+            else
+            {
+                GlobalVariables.SecondNumber += "5";
+            }
         }
         else
         {
-            GlobalVariables.SecondNumber += "5";
+            if (GlobalVariables.IsSecondNumber == false)
+            {
+                GlobalVariables.FirstNumber += "5";
+            }
+            else
+            {
+                GlobalVariables.SecondNumber += "5";
+            }
         }
     }
 
@@ -100,13 +209,31 @@ public class Number
     {
         _window.Display.Content += "6";
 
-        if (GlobalVariables.IsSecondNumber == false)
+        if (GlobalVariables.IsError == true)
         {
-            GlobalVariables.FirstNumber += "6";
+            _window.Display.Content = "6";
+            GlobalVariables.IsError = false;
+            GlobalVariables.IsSecondNumber = false;
+
+            if (GlobalVariables.IsSecondNumber == false)
+            {
+                GlobalVariables.FirstNumber += "6";
+            }
+            else
+            {
+                GlobalVariables.SecondNumber += "6";
+            }
         }
         else
         {
-            GlobalVariables.SecondNumber += "6";
+            if (GlobalVariables.IsSecondNumber == false)
+            {
+                GlobalVariables.FirstNumber += "6";
+            }
+            else
+            {
+                GlobalVariables.SecondNumber += "6";
+            }
         }
     }
 
@@ -114,13 +241,31 @@ public class Number
     {
         _window.Display.Content += "7";
 
-        if (GlobalVariables.IsSecondNumber == false)
+        if (GlobalVariables.IsError == true)
         {
-            GlobalVariables.FirstNumber += "7";
+            _window.Display.Content = "7";
+            GlobalVariables.IsError = false;
+            GlobalVariables.IsSecondNumber = false;
+
+            if (GlobalVariables.IsSecondNumber == false)
+            {
+                GlobalVariables.FirstNumber += "7";
+            }
+            else
+            {
+                GlobalVariables.SecondNumber += "7";
+            }
         }
         else
         {
-            GlobalVariables.SecondNumber += "7";
+            if (GlobalVariables.IsSecondNumber == false)
+            {
+                GlobalVariables.FirstNumber += "7";
+            }
+            else
+            {
+                GlobalVariables.SecondNumber += "7";
+            }
         }
     }
 
@@ -128,13 +273,31 @@ public class Number
     {
         _window.Display.Content += "8";
 
-        if (GlobalVariables.IsSecondNumber == false)
+        if (GlobalVariables.IsError == true)
         {
-            GlobalVariables.FirstNumber += "8";
+            _window.Display.Content = "8";
+            GlobalVariables.IsError = false;
+            GlobalVariables.IsSecondNumber = false;
+
+            if (GlobalVariables.IsSecondNumber == false)
+            {
+                GlobalVariables.FirstNumber += "8";
+            }
+            else
+            {
+                GlobalVariables.SecondNumber += "8";
+            }
         }
         else
         {
-            GlobalVariables.SecondNumber += "8";
+            if (GlobalVariables.IsSecondNumber == false)
+            {
+                GlobalVariables.FirstNumber += "8";
+            }
+            else
+            {
+                GlobalVariables.SecondNumber += "8";
+            }
         }
     }
 
@@ -142,13 +305,31 @@ public class Number
     {
         _window.Display.Content += "9";
 
-        if (GlobalVariables.IsSecondNumber == false)
+        if (GlobalVariables.IsError == true)
         {
-            GlobalVariables.FirstNumber += "9";
+            _window.Display.Content = "9";
+            GlobalVariables.IsError = false;
+            GlobalVariables.IsSecondNumber = false;
+
+            if (GlobalVariables.IsSecondNumber == false)
+            {
+                GlobalVariables.FirstNumber += "9";
+            }
+            else
+            {
+                GlobalVariables.SecondNumber += "9";
+            }
         }
         else
         {
-            GlobalVariables.SecondNumber += "9";
+            if (GlobalVariables.IsSecondNumber == false)
+            {
+                GlobalVariables.FirstNumber += "9";
+            }
+            else
+            {
+                GlobalVariables.SecondNumber += "9";
+            }
         }
     }
 }

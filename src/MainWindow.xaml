@@ -246,8 +246,6 @@
                 -->
                 <Style x:Key="LabelStyle"
                        TargetType="Label">
-                    <Setter Property="OverridesDefaultStyle"
-                            Value="True"/>
                     <Setter Property="Margin"
                             Value="5"/>
                     <Setter Property="Foreground"
@@ -259,19 +257,25 @@
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="Label">
-                                <Border Name="border"
-                                        BorderThickness="0"
-                                        Padding="8,8"
-                                        BorderBrush="DarkGray"
+                                <Border Background="#2a2a2a"
                                         CornerRadius="6"
-                                        Background="#2a2a2a">
-                                    <ContentPresenter HorizontalAlignment="Right"
-                                                      VerticalAlignment="Center"/>
+                                        Padding="8">
+                                    <Viewbox Stretch="Uniform"
+                                             StretchDirection="DownOnly"
+                                             HorizontalAlignment="Right"
+                                             VerticalAlignment="Stretch">
+                                        <TextBlock Text="{TemplateBinding Content}"
+                                                   TextAlignment="Right"
+                                                   FontSize="{TemplateBinding FontSize}"
+                                                   FontWeight="{TemplateBinding FontWeight}"
+                                                   Foreground="{TemplateBinding Foreground}"/>
+                                    </Viewbox>
                                 </Border>
                             </ControlTemplate>
                         </Setter.Value>
                     </Setter>
                 </Style>
+
             </Grid.Resources>
 
             <!--
